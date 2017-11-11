@@ -180,6 +180,7 @@ app.post('/webhook', function (req, res) {
 }
 
 function receivedMessage(event) {
+  console.log(event);
   var senderID = event.sender.id;
   var pageID = event.recipient.id;
   var timeOfMessage = event.timestamp;
