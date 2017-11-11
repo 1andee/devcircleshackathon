@@ -175,7 +175,7 @@ app.post('/webhook', function (req, res) {
  *
  */
 
- function firstEntity(nlp, name) {
+function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
 
@@ -198,10 +198,10 @@ function receivedMessage(event) {
   var messageText = message.text;
 
   console.log(JSON.stringify(message.nlp));
-  const greeting = firstEntity(message.nlp, 'greeting');
 
+  const greeting = firstEntity(message.nlp, 'greetings');
   if (greeting && greeting.confidence > 0.8) {
-    sendResponse('Hi there!');
+    sendTextMessage(senderID, 'Hi there!');
   } else if (messageText) {
 
     var lcm = messageText.toLowerCase();
