@@ -174,11 +174,6 @@ app.post('/webhook', function (req, res) {
  * Read more at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-received
  *
  */
-
-function firstEntity(nlp, name) {
-  return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
-}
-
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var pageID = event.recipient.id;
@@ -196,25 +191,7 @@ function receivedMessage(event) {
   }
 
   var messageText = message.text;
-
-  console.log(JSON.stringify(message.nlp));
-
-  const greetings = firstEntity(message.nlp, 'greetings');
-  const location = firstEntity(message.nlp, 'location');
-  const thanks = firstEntity(message.nlp, 'thanks');
-  const bye = firstEntity(message.nlp, 'bye');
-  const email = firstEntity(message.nlp, 'email');
-  const phone_number = firstEntity(message.nlp, 'phone_number');
-  const datetime = firstEntity(message.nlp, 'datetime');
-  const amount_of_money = firstEntity(message.nlp, 'amount_of_money');
-
-  if (bye && bye.confidence > 0.89) {
-    sendTextMessage(senderID, 'Thanks for chatting with us. Have an awesome day!');
-  } else if (greetings && greetings.confidence > 0.8) {
-    sendTextMessage(senderID, 'Hi, I\'m Wall-e, your virtual assistant. How may I assist you? Type <command1> or <command2> to get started.');
-  }  else if (thanks && thanks.confidence > 0.8) {
-    sendTextMessage(senderID, 'It\'s my pleasure!');
-  } else if (messageText) {
+  if (messageText) {
 
     var lcm = messageText.toLowerCase();
     switch (lcm) {
@@ -222,6 +199,10 @@ function receivedMessage(event) {
       case 'help':
         sendHelpOptionsAsButtonTemplates(senderID);
         break;
+
+      case 'white':
+        showWhiteProducts(senderID);
+        break;    
 
       default:
         // otherwise, just echo it back to the sender
@@ -261,6 +242,50 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
 
   callSendAPI(messageData);
 }
+
+function showWhiteProducts (recipientId) {
+  var products = shopify.product.list({ limit: 3});
+  products.then(function(listOfProducs) {
+        listOfProducs.forEach(function(product) {
+          var url = HOST_URL + "/product.html?id="+product.id;
+          templateElements.push({
+            title: product.title,
+            subtitle: product.tags,
+            image_url: product.image.src,
+            buttons:[
+              {
+                "type":"web_url",
+                "url": url,
+                "title":"Read description",
+                "webview_height_ratio": "compact",
+                "messenger_extensions": "true"
+              },
+              sectionButton('Get options', 'QR_GET_PRODUCT_OPTIONS', {id: product.id})
+            ]
+          });
+        });
+
+
+        var messageData = {
+          recipient: {
+            id: recipientId
+          },
+          message: {
+            attachment: {
+              type: "template",
+              payload: {
+                template_type: "generic",
+                elements: templateElements
+              }
+            }
+          }
+        };
+
+        callSendAPI(messageData);
+
+      }
+}
+
 
 /*
  * Someone tapped one of the Quick Reply buttons so
