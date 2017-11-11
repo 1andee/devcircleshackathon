@@ -256,7 +256,7 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
             {
               "type":"postback",
               "title":"Get 3 products",
-              "payload":JSON.stringify({action: 'QR_GET_PRODUCT_LIST', limit: 3})
+              "payload":JSON.stringify({action: 'QR_GET_PRODUCT_LIST', limit: 150})
             }
             // limit of three buttons
           ]
