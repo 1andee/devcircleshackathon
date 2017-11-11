@@ -12,7 +12,6 @@
 
 const
   bodyParser = require('body-parser'),
-  config = require('config'),
   crypto = require('crypto'),
   express = require('express'),
   https = require('https'),
@@ -32,35 +31,13 @@ app.use(express.static('public'));
  */
 
 // App Secret can be retrieved from the App Dashboard
-const FB_APP_SECRET = (process.env.FB_APP_SECRET) ?
-  process.env.FB_APP_SECRET :
-  config.get('fb_appSecret');
-
-// Arbitrary value used to validate a webhook
-const FB_VALIDATION_TOKEN = (process.env.FB_VALIDATION_TOKEN) ?
-  (process.env.FB_VALIDATION_TOKEN) :
-  config.get('fb_validationToken');
-
-// Generate a page access token for your page from the App Dashboard
-const FB_PAGE_ACCESS_TOKEN = (process.env.FB_PAGE_ACCESS_TOKEN) ?
-  (process.env.FB_PAGE_ACCESS_TOKEN) :
-  config.get('fb_pageAccessToken');
-
-const SHOPIFY_SHOP_NAME = (process.env.SHOP_NAME) ?
-  process.env.SHOP_NAME :
-  config.get('sh_shopName');
-
-const SHOPIFY_API_KEY = (process.env.SHOP_API_KEY) ?
-  process.env.SHOP_API_KEY :
-  config.get('sh_apiKey');
-
-const SHOPIFY_API_PASSWORD = (process.env.SHOP_API_PASSWORD) ?
-  process.env.SHOP_API_PASSWORD :
-  config.get('sh_apiPassword');
-
-const HOST_URL = (process.env.HOST_URL) ?
-  process.env.HOST_URL :
-  config.get('host_url');
+const FB_APP_SECRET = process.env.FB_APP_SECRET;
+const FB_VALIDATION_TOKEN = process.env.FB_VALIDATION_TOKEN;
+const FB_PAGE_ACCESS_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
+const SHOPIFY_SHOP_NAME = process.env.SHOP_NAME;
+const SHOPIFY_API_KEY = process.env.SHOP_API_KEY;
+const SHOPIFY_API_PASSWORD = process.env.SHOP_API_PASSWORD;
+const HOST_URL = process.env.HOST_URL;
 
 // make sure that everything has been properly configured
 if (!(FB_APP_SECRET && FB_VALIDATION_TOKEN && FB_PAGE_ACCESS_TOKEN && SHOPIFY_SHOP_NAME && SHOPIFY_API_KEY && SHOPIFY_API_PASSWORD && HOST_URL)) {
