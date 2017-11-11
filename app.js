@@ -320,7 +320,7 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
       console.log(products.list);
       products.then(function(listOfProducs) {
         listOfProducs.forEach(function(product) {
-          var url = HOST_URL + "/product.html?id="+[p];.id;
+          var url = HOST_URL + "/product.html?id="+product.id;
           templateElements.push({
             title: product.title,
             subtitle: product.tags,
