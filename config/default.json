@@ -1,0 +1,13 @@
+{
+    "sh_shopName": "dev-circle-toronto-hackathon",
+    "host_url": "", //ngrok URL here
+
+    //FACEBOOK CREDENTIALS
+    "fb_appSecret": "",
+    "fb_pageAccessToken": "",
+    "fb_validationToken": "",
+
+    //SHOPIFY CREDENTIALS
+    "sh_apiKey": "",
+    "sh_apiPassword": "",
+}
