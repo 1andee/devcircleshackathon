@@ -203,6 +203,10 @@ function receivedMessage(event) {
   const location = firstEntity(message.nlp, 'location');
   const thanks = firstEntity(message.nlp, 'thanks');
   const bye = firstEntity(message.nlp, 'bye');
+  const email = firstEntity(message.nlp, 'email');
+  const phone_number = firstEntity(message.nlp, 'phone_number');
+  const datetime = firstEntity(message.nlp, 'datetime');
+  const amount_of_money = firstEntity(message.nlp, 'amount_of_money');
 
   if (bye && bye.confidence > 0.89) {
     sendTextMessage(senderID, 'Thanks for chatting with us. Have an awesome day!');
