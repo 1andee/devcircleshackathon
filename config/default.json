@@ -1,6 +1,6 @@
 {
     "sh_shopName": "dev-circle-toronto-hackathon",
-    "host_url": "https://23e279c9.ngrok.io",
+    "host_url": "https://devcircletoronto13.herokuapp.com",
 
     //FACEBOOK CREDENTIALS
     "fb_appSecret": "569a48f7f6c13ed64aa63e486522a472",
