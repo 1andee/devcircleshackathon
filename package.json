@@ -26,6 +26,6 @@
     "shopify-api-node": "^2.8.0"
   },
   "engines": {
-    "node": "~4.1.2"
+    "node": "~4.7.0"
   }
 }
