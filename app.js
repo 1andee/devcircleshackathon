@@ -204,10 +204,10 @@ function receivedMessage(event) {
   const thanks = firstEntity(message.nlp, 'thanks');
   const bye = firstEntity(message.nlp, 'bye');
 
-  if (greetings && greetings.confidence > 0.8) {
-    sendTextMessage(senderID, 'Hi, I\'m Wall-e, your virtual assistant. How may I assist you?\nType <command1> or <command2> to get started.');
-  } else if (bye && bye.confidence > 0.8) {
+  if (bye && bye.confidence > 0.89) {
     sendTextMessage(senderID, 'Thanks for chatting with us. Have an awesome day!');
+  } else if (greetings && greetings.confidence > 0.8) {
+    sendTextMessage(senderID, 'Hi, I\'m Wall-e, your virtual assistant. How may I assist you? Type <command1> or <command2> to get started.');
   }  else if (thanks && thanks.confidence > 0.8) {
     sendTextMessage(senderID, 'It\'s my pleasure!');
   } else if (messageText) {
