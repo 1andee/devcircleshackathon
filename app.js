@@ -32,18 +32,12 @@ app.use(express.static('public'));
 
 // App Secret can be retrieved from the App Dashboard
 const FB_APP_SECRET = process.env.FB_APP_SECRET;
-const FB_VALIDATION_TOKEN = process.env.FB_VALIDATION_TOKEN;
-const FB_PAGE_ACCESS_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
-const SHOPIFY_SHOP_NAME = process.env.SHOP_NAME;
-const SHOPIFY_API_KEY = process.env.SHOP_API_KEY;
-const SHOPIFY_API_PASSWORD = process.env.SHOP_API_PASSWORD;
+const FB_VALIDATION_TOKEN = process.env.FB_VALIDATIONTOKEN;
+const FB_PAGE_ACCESS_TOKEN = process.env.FB_PAGEACCESSTOKEN;
+const SHOPIFY_SHOP_NAME = process.env.SH_SHOPNAME;
+const SHOPIFY_API_KEY = process.env.SH_APIKEY;
+const SHOPIFY_API_PASSWORD = process.env.SH_APIPASSWORD;
 const HOST_URL = process.env.HOST_URL;
-
-// make sure that everything has been properly configured
-if (!(FB_APP_SECRET && FB_VALIDATION_TOKEN && FB_PAGE_ACCESS_TOKEN && SHOPIFY_SHOP_NAME && SHOPIFY_API_KEY && SHOPIFY_API_PASSWORD && HOST_URL)) {
-  console.error("Missing config values");
-  process.exit(1);
-}
 
 const shopify = new Shopify({
   shopName: SHOPIFY_SHOP_NAME,
