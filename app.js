@@ -174,6 +174,11 @@ app.post('/webhook', function (req, res) {
  * Read more at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-received
  *
  */
+
+function firstEntity(nlp, name) {
+  return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
+}
+
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var pageID = event.recipient.id;
@@ -191,7 +196,25 @@ function receivedMessage(event) {
   }
 
   var messageText = message.text;
-  if (messageText) {
+
+  console.log(JSON.stringify(message.nlp));
+
+  const greetings = firstEntity(message.nlp, 'greetings');
+  const location = firstEntity(message.nlp, 'location');
+  const thanks = firstEntity(message.nlp, 'thanks');
+  const bye = firstEntity(message.nlp, 'bye');
+  const email = firstEntity(message.nlp, 'email');
+  const phone_number = firstEntity(message.nlp, 'phone_number');
+  const datetime = firstEntity(message.nlp, 'datetime');
+  const amount_of_money = firstEntity(message.nlp, 'amount_of_money');
+
+  if (bye && bye.confidence > 0.89) {
+    sendTextMessage(senderID, 'Thanks for chatting with us. Have an awesome day!');
+  } else if (greetings && greetings.confidence > 0.8) {
+    sendTextMessage(senderID, 'Hi, I\'m Wall-e, your virtual assistant. How may I assist you? Type <command1> or <command2> to get started.');
+  }  else if (thanks && thanks.confidence > 0.8) {
+    sendTextMessage(senderID, 'It\'s my pleasure!');
+  } else if (messageText) {
 
     var lcm = messageText.toLowerCase();
     switch (lcm) {
