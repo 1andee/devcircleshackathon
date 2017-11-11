@@ -251,14 +251,14 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
         type:"template",
         payload:{
           template_type:"button",
-          text:"Click the button before to get a list of 3 of our products.",
+          text:"Click the button before to get a list of 5 of our products.",
           buttons:[
             {
               "type":"postback",
-              "title":"Get 3 products",
-              "payload":JSON.stringify({action: 'QR_GET_PRODUCT_LIST', limit: 150})
+              "title":"Get 5 products",
+              "payload":JSON.stringify({action: 'QR_GET_PRODUCT_LIST', limit: 5})
             }
-            // limit of three buttons
+            // limit of five buttons
           ]
         }
       }
