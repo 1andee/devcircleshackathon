@@ -174,6 +174,11 @@ app.post('/webhook', function (req, res) {
  * Read more at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-received
  *
  */
+
+ function firstEntity(nlp, name) {
+  return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
+}
+
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var pageID = event.recipient.id;
@@ -191,7 +196,12 @@ function receivedMessage(event) {
   }
 
   var messageText = message.text;
-  if (messageText) {
+
+  const greeting = firstEntity(message.nlp, 'greeting');
+
+  if (greeting && greeting.confidence > 0.8) {
+    sendResponse('Hi there!');
+  } else if (messageText) {
 
     var lcm = messageText.toLowerCase();
     switch (lcm) {
