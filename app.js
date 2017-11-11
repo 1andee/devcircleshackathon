@@ -180,7 +180,6 @@ app.post('/webhook', function (req, res) {
 }
 
 function receivedMessage(event) {
-  console.log(event);
   var senderID = event.sender.id;
   var pageID = event.recipient.id;
   var timeOfMessage = event.timestamp;
@@ -198,6 +197,7 @@ function receivedMessage(event) {
 
   var messageText = message.text;
 
+  console.log(JSON.stringify(message.nlp));
   const greeting = firstEntity(message.nlp, 'greeting');
 
   if (greeting && greeting.confidence > 0.8) {
