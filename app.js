@@ -420,6 +420,7 @@ function receivedDeliveryConfirmation(event) {
  *
  */
 function receivedPostback(event) {
+  console.log(JSON.stringify(event));
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
