@@ -283,7 +283,7 @@ function showWhiteProducts (recipientId) {
 
         callSendAPI(messageData);
 
-      }
+      });
 }
 
 
@@ -342,7 +342,6 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
   switch (requestPayload.action) {
     case 'QR_GET_PRODUCT_LIST':
       var products = shopify.product.list({ limit: requestPayload.limit});
-      console.log(products.list);
       products.then(function(listOfProducs) {
         listOfProducs.forEach(function(product) {
           var url = HOST_URL + "/product.html?id="+product.id;
@@ -446,7 +445,6 @@ function receivedDeliveryConfirmation(event) {
  *
  */
 function receivedPostback(event) {
-  console.log(JSON.stringify(event));
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
