@@ -21,7 +21,7 @@ const
 var app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
-// app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
 /*
@@ -54,29 +54,29 @@ const shopify = new Shopify({
  * https://developers.facebook.com/docs/graph-api/webhooks#setup
  *
 //  */
-// function verifyRequestSignature(req, res, buf) {
-//   var signature = req.headers["x-hub-signature"];
-//
-//   if (!signature) {
-//     // In DEV, log an error. In PROD, throw an error.
-//     console.error("Couldn't validate the signature.");
-//   } else {
-//     var elements = signature.split('=');
-//     var method = elements[0];
-//     var signatureHash = elements[1];
-//
-//     var expectedHash = crypto.createHmac('sha1', FB_APP_SECRET)
-//                         .update(buf)
-//                         .digest('hex');
+function verifyRequestSignature(req, res, buf) {
+  var signature = req.headers["x-hub-signature"];
 
-    //console.log("signatureHash: " + signatureHash);
-    //console.log("expectedHash: " + expectedHash);
+  if (!signature) {
+    // In DEV, log an error. In PROD, throw an error.
+    console.error("Couldn't validate the signature.");
+  } else {
+    var elements = signature.split('=');
+    var method = elements[0];
+    var signatureHash = elements[1];
 
-//     if (signatureHash != expectedHash) {
-//       throw new Error("Couldn't validate the request signature.");
-//     }
-//   }
-// }
+    var expectedHash = crypto.createHmac('sha1', FB_APP_SECRET)
+                        .update(buf)
+                        .digest('hex');
+
+    console.log("signatureHash: " + signatureHash);
+    console.log("expectedHash: " + expectedHash);
+
+    if (signatureHash != expectedHash) {
+      throw new Error("Couldn't validate the request signature.");
+    }
+  }
+}
 
 /*
  * Use your own validation token. Check that the token used in the Webhook
@@ -130,9 +130,6 @@ app.post('/webhook', function (req, res) {
   res.sendStatus(200);
 
   var data = req.body;
-
-  console.log(JSON.stringify(data));
-  console.log(JSON.stringify(data.object));
 
   // Make sure this is a page subscription
   if (data.object == 'page') {
