@@ -324,7 +324,6 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
         message:{
           text: "Take a quick look!",
           quick_replies: quickReplyList
-         ]
         }
       };
 
