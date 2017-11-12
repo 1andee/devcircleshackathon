@@ -271,16 +271,13 @@ function showWhiteProducts (recipientId) {
   console.log("showWhiteProducts being hit");
   var products = shopify.product.list({ limit: 3});
 
-  var products = product.options.map(function(option) {
-    options = options + option.name
-  });
-
-
   products.then(function(listOfProducts) {
 
         listOfProducts.forEach(function(product) {
           console.log(`productID: ${product.id}`);
           var url = HOST_URL + "/product.html?id="+product.id;
+
+          console.log(`color option: ${product.options.color`);
           
           templateElements.push({
             title: product.title,
@@ -423,6 +420,7 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
       sh_product.then(function(product) {
         var options = '';
         product.options.map(function(option) {
+          console.log(`option: ${option}`);
           options = options + option.name + ': ' + option.values.join(',') + "\n";
         });
         var messageData = {
