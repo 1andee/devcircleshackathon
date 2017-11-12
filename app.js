@@ -271,6 +271,7 @@ function showWhiteProducts (recipientId) {
   var products = shopify.product.list({ limit: 3});
   products.then(function(listOfProducts) {
         listOfProducts.forEach(function(product) {
+          console.log(product.id);
           var url = HOST_URL + "/product.html?id="+product.id;
           templateElements.push({
             title: product.title,
