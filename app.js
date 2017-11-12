@@ -145,6 +145,8 @@ app.post('/webhook', function (req, res) {
         for (var prop in messagingEvent) { propertyNames.push(prop)}
         console.log("[app.post] Webhook received a messagingEvent with properties: ", propertyNames.join());
 
+        console.log(JSON.stringify(messagingEvent));
+
         if (messagingEvent.message) {
           // someone sent a message
           receivedMessage(messagingEvent);
@@ -196,6 +198,7 @@ function receivedMessage(event) {
   }
 
   var messageText = message.text;
+  console.log(JSON.stringify(messageText));
   console.log(JSON.stringify(message.nlp));
 
   const greetings = firstEntity(message.nlp, 'greetings');
@@ -225,8 +228,7 @@ function receivedMessage(event) {
       case 'white':
         console.log("white is being hit");
         showWhiteProducts(senderID);
-        break;    
-        
+        break;
       default:
         // otherwise, just echo it back to the sender
         sendTextMessage(senderID, messageText);
@@ -277,8 +279,11 @@ function showWhiteProducts (recipientId) {
           console.log(`productID: ${product.id}`);
           var url = HOST_URL + "/product.html?id="+product.id;
 
+<<<<<<< HEAD
           console.log(`color option: ${product.options.color`);
           
+=======
+>>>>>>> 18c868e6b1c824ca8e8dd3958db5e7c07fb12251
           templateElements.push({
             title: product.title,
             subtitle: product.tags,
