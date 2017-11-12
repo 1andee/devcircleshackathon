@@ -245,6 +245,7 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
 }
 
 function showWhiteProducts (recipientId) {
+  console.log("showWhiteProducts being hit");
   var products = shopify.product.list({ limit: 3});
   products.then(function(listOfProducs) {
         listOfProducs.forEach(function(product) {
