@@ -267,6 +267,7 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
 }
 
 function showWhiteProducts (recipientId) {
+  var templateElements = [];
   console.log("showWhiteProducts being hit");
   var products = shopify.product.list({ limit: 3});
   products.then(function(listOfProducts) {
