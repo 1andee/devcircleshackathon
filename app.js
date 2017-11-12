@@ -343,7 +343,7 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
 
     callSendAPI(messageData);
 
-}
+});
 
 
 
