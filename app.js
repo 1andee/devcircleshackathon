@@ -131,6 +131,9 @@ app.post('/webhook', function (req, res) {
 
   var data = req.body;
 
+  console.log(JSON.stringify(data));
+  console.log(JSON.stringify(data.object));
+
   // Make sure this is a page subscription
   if (data.object == 'page') {
     // entries may be batched so iterate over each one
