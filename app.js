@@ -202,7 +202,8 @@ function receivedMessage(event) {
 
       case 'white':
         console.log("white is being hit");
-        showWhiteProducts(senderID);
+        //showWhiteProducts(senderID);
+        sendTextMessage(senderID, "hello bud");
         break;    
 
       default:
