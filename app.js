@@ -334,7 +334,6 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
        quickReplyList.push({
         content_type:"text",
         title:product.title,
-        // payload:payload,
         image_url:product.url
        });
    });
@@ -344,6 +343,8 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
     callSendAPI(messageData);
 
 });
+
+}
 
 
 
