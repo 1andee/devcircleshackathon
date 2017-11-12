@@ -223,6 +223,7 @@ function receivedMessage(event) {
         break;
 
       case 'white':
+        console.log("white is being hit");
         showWhiteProducts(senderID);
         break;
 
@@ -266,6 +267,7 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
 }
 
 function showWhiteProducts (recipientId) {
+  console.log("showWhiteProducts being hit");
   var products = shopify.product.list({ limit: 3});
   products.then(function(listOfProducs) {
         listOfProducs.forEach(function(product) {
@@ -305,7 +307,7 @@ function showWhiteProducts (recipientId) {
 
         callSendAPI(messageData);
 
-      }
+      });
 }
 
 
@@ -364,7 +366,6 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
   switch (requestPayload.action) {
     case 'QR_GET_PRODUCT_LIST':
       var products = shopify.product.list({ limit: requestPayload.limit});
-      console.log(products.list);
       products.then(function(listOfProducs) {
         listOfProducs.forEach(function(product) {
           var url = HOST_URL + "/product.html?id="+product.id;
@@ -468,7 +469,6 @@ function receivedDeliveryConfirmation(event) {
  *
  */
 function receivedPostback(event) {
-  console.log(JSON.stringify(event));
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
