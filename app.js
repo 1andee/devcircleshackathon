@@ -289,7 +289,7 @@ function showWhiteProducts (recipientId) {
               sectionButton('Get options', 'QR_GET_PRODUCT_OPTIONS', {id: product.id})
             ]
           });
-          console.log(templateElements);
+          console.log(`array: ${templateElements}`);
         });
 
         var messageData = {
