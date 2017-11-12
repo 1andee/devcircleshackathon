@@ -130,7 +130,7 @@ app.post('/webhook', function (req, res) {
   res.sendStatus(200);
 
   console.log(JSON.stringify(req.body.originalRequest));
-  console.log(JSON.stringify(req.body.result));
+  console.log(JSON.stringify(req.body.result.parameters));
   var data = req.body;
 
   // Make sure this is a page subscription
