@@ -293,6 +293,7 @@ function showWhiteProducts (recipientId) {
               }]
           });
           console.log(`array: ${templateElements}`);
+          console.log(`${product.options.color}`);
 
         });
 
