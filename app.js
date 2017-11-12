@@ -129,9 +129,8 @@ app.post('/webhook', function (req, res) {
   // you're paused on a breakpoint! Otherwise, the request might time out.
   res.sendStatus(200);
 
-  console.log(JSON.stringify('req.body.result', req.body.result));
-  console.log(JSON.stringify("req.body['result'].parameters", req.body['result'].parameters));
-  console.log(JSON.stringify("req.body['result']['parameters']", req.body['result']['parameters']));
+  console.log(JSON.stringify(req.body.originalRequest));
+  console.log(JSON.stringify(req.body.result));
   var data = req.body;
 
   // Make sure this is a page subscription
