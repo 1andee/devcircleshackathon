@@ -288,6 +288,7 @@ function showWhiteProducts (recipientId) {
               },
               sectionButton('Get options', 'QR_GET_PRODUCT_OPTIONS', {id: product.id})
             ]
+            console.log(`array: ${templateElements}`);  
           });
           console.log(`array: ${templateElements}`);
         });
@@ -430,8 +431,6 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
         };
         callSendAPI(messageData);
       });
-
-
 
       break;
   }
