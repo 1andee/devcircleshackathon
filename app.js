@@ -267,6 +267,45 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
   callSendAPI(messageData);
 }
 
+
+/*
+ * Send a quick reply
+ *
+ */
+ function respondWithQuickReply(recipientId) {
+   console.log("[respondWithQuickReply] is triggered!");
+
+   // get product data from the shop - return a promise
+   var qr_list_products = shopify.product.list({ limit: 3});
+
+   qr_list_products.then(function(listOfProducts) {
+     listOfProducts.forEach(function(product) {
+
+       var messageData = {
+         recipient: {
+           id: recipientId
+         },
+         message:{
+           text: "Here's a quick reply!",
+           quick_replies:[
+            {
+              "content_type":"text",
+              "title":product.title,
+              "payload":payload,
+              "image_url":product.url
+            }
+          ]
+         }
+       };
+
+       callSendAPI(messageData);
+
+   });
+
+}
+
+
+
 function showWhiteProducts (recipientId) {
   var templateElements = [];
   console.log("showWhiteProducts being hit");
