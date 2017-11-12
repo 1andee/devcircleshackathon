@@ -257,6 +257,12 @@ function receivedMessage(event) {
         console.log("white is being hit");
         showWhiteProducts(senderID);
         break;
+
+      case 'quick reply':
+        console.log('getting quick reqsponse');
+        respondWithQuickReply(senderID);
+        break;
+
       default:
         // otherwise, just echo it back to the sender
         sendTextMessage(senderID, messageText);
@@ -295,6 +301,52 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
 
   callSendAPI(messageData);
 }
+
+
+/*
+ * Send a quick reply
+ *
+ */
+ function respondWithQuickReply(recipientId) {
+   console.log("[respondWithQuickReply] is triggered!");
+
+   // get product data from the shop - return a promise
+   var qr_list_products = shopify.product.list({ limit: 3});
+
+   qr_list_products.then(function(listOfProducts) {
+
+     var quickReplyList = [];
+
+      var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message:{
+          text: "Take a quick look!",
+          quick_replies: quickReplyList
+         ]
+        }
+      };
+
+
+     // iterate each item from the list of products
+     listOfProducts.forEach(function(product) {
+
+       quickReplyList.push({
+        content_type:"text",
+        title:product.title,
+        // payload:payload,
+        image_url:product.url
+       });
+   });
+
+    console.log(`Printing a list of quick replies: ${quickReplyList}!`);
+
+    callSendAPI(messageData);
+
+}
+
+
 
 function showWhiteProducts (recipientId) {
   var templateElements = [];
