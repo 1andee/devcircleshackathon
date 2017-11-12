@@ -279,28 +279,35 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
    var qr_list_products = shopify.product.list({ limit: 3});
 
    qr_list_products.then(function(listOfProducts) {
+
+     var quickReplyList = [];
+
+      var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message:{
+          text: "Take a quick look!",
+          quick_replies: quickReplyList
+         ]
+        }
+      };
+
+
+     // iterate each item from the list of products
      listOfProducts.forEach(function(product) {
 
-       var messageData = {
-         recipient: {
-           id: recipientId
-         },
-         message:{
-           text: "Here's a quick reply!",
-           quick_replies:[
-            {
-              "content_type":"text",
-              "title":product.title,
-              "payload":payload,
-              "image_url":product.url
-            }
-          ]
-         }
-       };
-
-       callSendAPI(messageData);
-
+       quickReplyList.push({
+        content_type:"text",
+        title:product.title,
+        payload:payload,
+        image_url:product.url
+       });
    });
+
+    console.log(`Printing a list of quick replies: ${quickReplyList}!`);
+
+    callSendAPI(messageData);
 
 }
 
