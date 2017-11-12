@@ -167,8 +167,35 @@ app.post('/webhook', function (req, res) {
         }
       });
     });
+  } else if (data.originalRequest.source === 'facebook') {
+      receivedFacebookMessage(data);
   }
 });
+
+function receivedFacebookMessage(event) {
+  console.log("In receivedFacebookMessage");
+  var senderID = event.originalRequest.data.sender.id;
+  var pageID = event.originalRequest.data.recipient.id;
+  var timeOfMessage = event.originalRequest.data.timestamp;
+  var message = event.originalRequest.data.message;
+
+  var messageText = message.text;
+  if (messageText) {
+
+    var lcm = messageText.toLowerCase();
+    switch (lcm) {
+      // if the text matches any special keywords, handle them accordingly
+      case 'help':
+        sendHelpOptionsAsButtonTemplates(senderID);
+        break;
+
+      default:
+        // otherwise, just echo it back to the sender
+        sendTextMessage(senderID, messageText);
+    }
+  }
+
+}
 
 
 function firstEntity(nlp, name) {
