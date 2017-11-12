@@ -131,6 +131,8 @@ app.post('/webhook', function (req, res) {
 
   var data = req.body;
 
+  console.log(JSON.stringify(data));
+
   // Make sure this is a page subscription
   if (data.object == 'page') {
     // entries may be batched so iterate over each one
@@ -225,8 +227,8 @@ function receivedMessage(event) {
       case 'white':
         console.log("white is being hit");
         sendTextMessage(senderID, "hello bud");
-        break;    
-        
+        break;
+
       default:
         // otherwise, just echo it back to the sender
         sendTextMessage(senderID, messageText);
