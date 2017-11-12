@@ -55,6 +55,7 @@ const shopify = new Shopify({
  *
  */
 function verifyRequestSignature(req, res, buf) {
+  console.log(JSON.stringify(req.headers));
   var signature = req.headers["x-hub-signature"];
 
   if (!signature) {
@@ -145,8 +146,6 @@ app.post('/webhook', function (req, res) {
         for (var prop in messagingEvent) { propertyNames.push(prop)}
         console.log("[app.post] Webhook received a messagingEvent with properties: ", propertyNames.join());
 
-        console.log(JSON.stringify(messagingEvent));
-
         if (messagingEvent.message) {
           // someone sent a message
           receivedMessage(messagingEvent);
@@ -198,7 +197,6 @@ function receivedMessage(event) {
   }
 
   var messageText = message.text;
-  console.log(JSON.stringify(messageText));
   console.log(JSON.stringify(message.nlp));
 
   const greetings = firstEntity(message.nlp, 'greetings');
