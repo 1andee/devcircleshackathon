@@ -1,8 +1,6 @@
 
 This is a project from the Facebook Developer Circle Hackathon on the weekend of November 11-12 created by five people: Ian Duke, Harrison Kim, Rose Wan, Jacques Begin, and Stephanie Zeng. The objective of the hackathon is to produce a bot that responds to customers on Facebook Messenger when asked about different apparel. Smart AI can pick up the greeting, color, size, material, and return recommendations and details back to the customer.
 
-https://dev-circle-toronto-hackathon.myshopify.com/pages/instructions
-
 ##Instructions
 DESCRIPTION
 
