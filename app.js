@@ -279,11 +279,6 @@ function showWhiteProducts (recipientId) {
           console.log(`productID: ${product.id}`);
           var url = HOST_URL + "/product.html?id="+product.id;
 
-<<<<<<< HEAD
-          console.log(`color option: ${product.options.color`);
-          
-=======
->>>>>>> 18c868e6b1c824ca8e8dd3958db5e7c07fb12251
           templateElements.push({
             title: product.title,
             subtitle: product.tags,
