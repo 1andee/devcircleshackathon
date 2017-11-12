@@ -273,6 +273,7 @@ function showWhiteProducts (recipientId) {
   products.then(function(listOfProducts) {
         listOfProducts.forEach(function(product) {
           console.log(`productID: ${product.id}`);
+          console.log(`array: ${templateElements}`);
           var url = HOST_URL + "/product.html?id="+product.id;
           templateElements.push({
             title: product.title,
@@ -288,7 +289,6 @@ function showWhiteProducts (recipientId) {
               },
               sectionButton('Get options', 'QR_GET_PRODUCT_OPTIONS', {id: product.id})
             ]
-            console.log(`array: ${templateElements}`);  
           });
           console.log(`array: ${templateElements}`);
         });
