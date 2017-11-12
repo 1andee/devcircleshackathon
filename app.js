@@ -202,7 +202,7 @@ function receivedMessage(event) {
 
       case 'white':
         console.log("white is being hit");
-        sendTextMessage(senderID, messsageText.toUpperCase());
+        showWhiteProducts(senderID);
         break;    
 
       default:
