@@ -270,11 +270,13 @@ function showWhiteProducts (recipientId) {
   var templateElements = [];
   console.log("showWhiteProducts being hit");
   var products = shopify.product.list({ limit: 3});
+  
   products.then(function(listOfProducts) {
+
         listOfProducts.forEach(function(product) {
           console.log(`productID: ${product.id}`);
-          console.log(`array: ${templateElements}`);
           var url = HOST_URL + "/product.html?id="+product.id;
+          
           templateElements.push({
             title: product.title,
             subtitle: product.tags,
@@ -286,11 +288,10 @@ function showWhiteProducts (recipientId) {
                 "title":"Read description",
                 "webview_height_ratio": "compact",
                 "messenger_extensions": "true"
-              },
-              sectionButton('Get options', 'QR_GET_PRODUCT_OPTIONS', {id: product.id})
-            ]
+              }]
           });
           console.log(`array: ${templateElements}`);
+
         });
 
         var messageData = {
