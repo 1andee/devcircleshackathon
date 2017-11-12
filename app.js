@@ -291,6 +291,9 @@ function showWhiteProducts (recipientId) {
           });
         });
 
+        console.log(templateElements);
+
+
 
         var messageData = {
           recipient: {
