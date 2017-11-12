@@ -277,6 +277,11 @@ function showWhiteProducts (recipientId) {
           console.log(`productID: ${product.id}`);
           var url = HOST_URL + "/product.html?id="+product.id;
 
+<<<<<<< HEAD
+          console.log(`color option: ${product.options.color`);
+          
+=======
+>>>>>>> 18c868e6b1c824ca8e8dd3958db5e7c07fb12251
           templateElements.push({
             title: product.title,
             subtitle: product.tags,
@@ -414,9 +419,11 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
 
     case 'QR_GET_PRODUCT_OPTIONS':
       var sh_product = shopify.product.get(requestPayload.id);
+      console.log(`requestPayload: ${requestPayload}`);
       sh_product.then(function(product) {
         var options = '';
         product.options.map(function(option) {
+          console.log(`option: ${option}`);
           options = options + option.name + ': ' + option.values.join(',') + "\n";
         });
         var messageData = {
