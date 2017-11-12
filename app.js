@@ -201,6 +201,7 @@ function receivedMessage(event) {
         break;
 
       case 'white':
+        console.log("white is being hit");
         sendTextMessage(senderID, messsageText.toUpperCase());
         break;    
 
