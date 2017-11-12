@@ -366,8 +366,8 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
   switch (requestPayload.action) {
     case 'QR_GET_PRODUCT_LIST':
       var products = shopify.product.list({ limit: requestPayload.limit});
-      products.then(function(listOfProducs) {
-        listOfProducs.forEach(function(product) {
+      products.then(function(listOfProducts) {
+        listOfProducts.forEach(function(product) {
           var url = HOST_URL + "/product.html?id="+product.id;
           templateElements.push({
             title: product.title,
