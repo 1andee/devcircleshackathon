@@ -228,6 +228,12 @@ function receivedMessage(event) {
         console.log("white is being hit");
         showWhiteProducts(senderID);
         break;
+
+      case 'quick reply':
+        console.log('getting quick reqsponse');
+        respondWithQuickReply(senderID);
+        break;
+
       default:
         // otherwise, just echo it back to the sender
         sendTextMessage(senderID, messageText);
@@ -300,7 +306,7 @@ function sendHelpOptionsAsButtonTemplates(recipientId) {
        quickReplyList.push({
         content_type:"text",
         title:product.title,
-        payload:payload,
+        // payload:payload,
         image_url:product.url
        });
    });
