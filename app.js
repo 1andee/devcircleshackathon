@@ -201,7 +201,7 @@ function receivedMessage(event) {
         break;
 
       case 'white':
-        showWhiteProducts(senderID);
+        sendTextMessage(senderID, messsageText.toUpperCase());
         break;    
 
       default:
