@@ -270,7 +270,12 @@ function showWhiteProducts (recipientId) {
   var templateElements = [];
   console.log("showWhiteProducts being hit");
   var products = shopify.product.list({ limit: 3});
-  
+
+  var products = product.options.map(function(option) {
+    options = options + option.name
+  });
+
+
   products.then(function(listOfProducts) {
 
         listOfProducts.forEach(function(product) {
@@ -414,6 +419,7 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
 
     case 'QR_GET_PRODUCT_OPTIONS':
       var sh_product = shopify.product.get(requestPayload.id);
+      console.log(`requestPayload: ${requestPayload}`);
       sh_product.then(function(product) {
         var options = '';
         product.options.map(function(option) {
