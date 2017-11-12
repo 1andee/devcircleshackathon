@@ -131,8 +131,6 @@ app.post('/webhook', function (req, res) {
 
   var data = req.body;
 
-  console.log(JSON.stringify(data));
-
   // Make sure this is a page subscription
   if (data.object == 'page') {
     // entries may be batched so iterate over each one
@@ -146,6 +144,8 @@ app.post('/webhook', function (req, res) {
         let propertyNames = [];
         for (var prop in messagingEvent) { propertyNames.push(prop)}
         console.log("[app.post] Webhook received a messagingEvent with properties: ", propertyNames.join());
+
+        console.log(JSON.stringify(messagingEvent));
 
         if (messagingEvent.message) {
           // someone sent a message
@@ -198,6 +198,7 @@ function receivedMessage(event) {
   }
 
   var messageText = message.text;
+  console.log(JSON.stringify(messageText));
   console.log(JSON.stringify(message.nlp));
 
   const greetings = firstEntity(message.nlp, 'greetings');
